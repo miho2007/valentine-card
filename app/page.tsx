@@ -57,7 +57,7 @@ export default function HomePage() {
 
         {!paid && (
           <div style={{ marginTop: "1rem" }}>
-            <PayPalButton amount="2.99" onSuccess={handlePaymentSuccess} />
+            <PayPalButton onSuccess={handlePaymentSuccess} />
           </div>
         )}
 
