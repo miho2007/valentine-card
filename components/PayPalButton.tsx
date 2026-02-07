@@ -10,7 +10,7 @@ export default function PayPalButton({ onSuccess }: Props) {
   return (
     <PayPalScriptProvider
       options={{
-        "clientId": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
+        clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
         currency: "USD",
       }}
     >
@@ -19,15 +19,22 @@ export default function PayPalButton({ onSuccess }: Props) {
         createOrder={(data, actions) =>
           actions!.order!.create({
             intent: "CAPTURE",
-            purchase_units: [{ amount: { value: "3.00", currency_code: "USD"} }],
+            purchase_units: [
+              {
+                amount: {
+                  value: "3.00",
+                  currency_code: "USD",
+                },
+              },
+            ],
           })
         }
-        onApprove={(data, actions) => { if (!actions?.order) return; actions.order.capture().then(() => onSuccess()); }}
+        onApprove={async (data, actions) => {
+          if (!actions?.order) return;
+          await actions.order.capture();
+          onSuccess();
+        }}
       />
     </PayPalScriptProvider>
   );
 }
-
-
-
-
