@@ -17,16 +17,17 @@ export default function PayPalButton({ onSuccess }: Props) {
       <PayPalButtons
         style={{ layout: "vertical", color: "blue", shape: "rect", label: "pay" }}
         createOrder={(data, actions) =>
-          actions.order.create({
+          actions!.order!.create({
             intent: "CAPTURE",
             purchase_units: [{ amount: { value: "3.00", currency_code: "USD"} }],
           })
         }
-        onApprove={(data, actions) => actions.order.capture().then(() => onSuccess())}
+        onApprove={(data, actions) => { if (!actions?.order) return; actions.order.capture().then(() => onSuccess()); }}
       />
     </PayPalScriptProvider>
   );
 }
+
 
 
 
