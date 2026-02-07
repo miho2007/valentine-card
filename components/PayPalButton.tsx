@@ -18,6 +18,7 @@ export default function PayPalButton({ onSuccess }: Props) {
         style={{ layout: "vertical", color: "blue", shape: "rect", label: "pay" }}
         createOrder={(data, actions) =>
           actions.order.create({
+            intent: "CAPTURE",
             purchase_units: [{ amount: { value: "3.00", currency_code: "USD"} }],
           })
         }
@@ -26,5 +27,6 @@ export default function PayPalButton({ onSuccess }: Props) {
     </PayPalScriptProvider>
   );
 }
+
 
 
