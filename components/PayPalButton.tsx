@@ -10,7 +10,7 @@ export default function PayPalButton({ onSuccess }: Props) {
   return (
     <PayPalScriptProvider
       options={{
-        "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
+        "clientId": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
         currency: "USD",
       }}
     >
@@ -26,3 +26,4 @@ export default function PayPalButton({ onSuccess }: Props) {
     </PayPalScriptProvider>
   );
 }
+
